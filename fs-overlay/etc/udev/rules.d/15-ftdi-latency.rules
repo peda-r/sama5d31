@@ -1,0 +1,21 @@
+SUBSYSTEM!="tty", GOTO="end"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6011", GOTO="ftdi"
+SUBSYSTEM=="*", GOTO="end"
+LABEL="ftdi"
+SUBSYSTEMS=="usb", KERNELS=="1-2:1.?", GOTO="ftdi-location"
+SUBSYSTEM=="*", GOTO="end"
+LABEL="ftdi-location"
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{bInterfaceNumber}=="00", \
+ ATTR{device/latency_timer}="1"
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{bInterfaceNumber}=="01", \
+ ATTR{device/latency_timer}="1"
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{bInterfaceNumber}=="02", \
+ ATTR{device/latency_timer}="1"
+
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{bInterfaceNumber}=="03", \
+ ATTR{device/latency_timer}="1"
+
+LABEL="end"
